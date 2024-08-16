@@ -1,0 +1,13 @@
+projects/
+├── project1/
+├── project2/
+└── tests/
+    ├── bin/
+    ├── logs/
+    ├── res/
+    ├── src/
+    ├── student/
+    ├── build
+    ├── LICENSE.txt
+    ├── README.txt
+    └── test.sh

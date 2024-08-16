@@ -1,0 +1,691 @@
+<!DOCTYPE HTML>
+<html lang="en" class="navy" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Guided Project 2.2 - CSC110 Projects</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "navy";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('navy')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../overview.html">Projects Overview</a></li><li class="chapter-item expanded affix "><a href="../setup.html">Project Directory Setup</a></li><li class="chapter-item expanded "><a href="../project1.html"><strong aria-hidden="true">1.</strong> Project Set 1: Character Sheet</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../project1/part1.html"><strong aria-hidden="true">1.1.</strong> Guided Project 1.1</a></li><li class="chapter-item expanded "><a href="../project1/part2.html"><strong aria-hidden="true">1.2.</strong> Guided Project 1.2</a></li><li class="chapter-item expanded "><a href="../project1/part3.html"><strong aria-hidden="true">1.3.</strong> Expanded Project 1.3</a></li></ol></li><li class="chapter-item expanded "><a href="../project2.html"><strong aria-hidden="true">2.</strong> Project Set 2: Dice Game</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../project2/part1.html"><strong aria-hidden="true">2.1.</strong> Guided Project 2.1</a></li><li class="chapter-item expanded "><a href="../project2/part2.html" class="active"><strong aria-hidden="true">2.2.</strong> Guided Project 2.2</a></li><li class="chapter-item expanded "><a href="../project2/part3.html"><strong aria-hidden="true">2.3.</strong> Expanded Project 2.3</a></li></ol></li><li class="chapter-item expanded "><a href="../self_directed.html"><strong aria-hidden="true">3.</strong> Self-Directed Projects</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">CSC110 Projects</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="guided-project-22"><a class="header" href="#guided-project-22">Guided Project 2.2</a></h1>
+<p>This part adds multiple rerolls and the ability to score a category from the
+upper section. It also adjusts the program's I/O to slightly improve usability.</p>
+<h2 id="learning-objectives"><a class="header" href="#learning-objectives">Learning Objectives</a></h2>
+<ul>
+<li>Simple conditional expressions</li>
+<li>Simple iterative expressions</li>
+<li>Simple functions</li>
+<li>Simple data structures (arrays, strings)</li>
+</ul>
+<h2 id="prerequisites-and-setup"><a class="header" href="#prerequisites-and-setup">Prerequisites and Setup</a></h2>
+<ul>
+<li>You should have already completed GP 2.1, including debugging the program
+until it passes all of the tests.</li>
+<li>Create a copy of <code>project2/part1/DiceGame.java</code> in your <code>project2/part2</code>
+folder. Make sure you are working on the file in the <code>part2</code> folder during
+this project. Don't leave the file from 2.1 open in another tab in your
+editor.</li>
+<li>Copy the <code>Dice.java</code> file to your <code>project2/part2</code> folder as well.</li>
+</ul>
+<h2 id="tasks"><a class="header" href="#tasks">Tasks</a></h2>
+<h3 id="task-1-guided-coding"><a class="header" href="#task-1-guided-coding">Task 1: Guided Coding</a></h3>
+<p>Follow the steps below and write the program as directed. Test your code
+frequently, <strong>at the bare minimum performing every test given in the steps.</strong></p>
+<p>If your code is not working as expected, do not move on to the next step until
+you have fixed it. Moving on without finishing a step correctly will make the
+problem significantly harder to fix and likely add new problems as you continue
+working. If you disregard this advice, then you may get to the end of the steps
+and find it would actually be less work to start over from step 1 than to debug
+the code you just finished writing.</p>
+<ol>
+<li>
+<p>We'll start with a small change to our previous code. Let's replace the old
+0-4 labels with letters:</p>
+<ul>
+<li>Modify the <code>diceString</code> method to use the labels A, B, C, D, and E instead
+of 0-4.</li>
+<li>Modify the <code>rollSomeDice</code> method to look for the letter corresponding to
+each index rather than the index itself. You can convert an index to a
+letter by adding it to <code>'a'</code> and converting the result to a <code>char</code>:
+<code>(char)('a' + index)</code>. You can then convert this character to a <code>String</code>
+and use it with the <code>contains</code> method like you did in part 1.</li>
+</ul>
+<p>As always, test your program before you continue. Make sure the correct
+labels are displayed and your program rerolls the proper dice when you enter
+letters instead of numbers.</p>
+</li>
+<li>
+<p>We're going to split our <code>game</code> method into two main parts: the reroll phase
+and the score phase. Most of our current code will move to a method for the
+reroll phase, and your program should still work the same as before the
+split. Check that everything is working when you test it.</p>
+<p>To split up the <code>game</code> method:</p>
+<ul>
+<li>Make a <code>rerollPhase</code> and a <code>scorePhase</code> method. Each of these methods
+should return nothing and take two parameters: a <code>Scanner</code> and an array of
+integers (our dice).</li>
+<li>Move most of the code that's currently in <code>game</code> into <code>rerollPhase</code>. Leave
+the lines that create the dice array and roll all of the dice in your
+<code>game</code> method.</li>
+<li>Call <code>rerollPhase</code> and <code>scorePhase</code> in your <code>game</code> method. The score phase
+won't do anything for now, but you could add a placeholder print statement
+just to show that it's getting called. Your <code>game</code> method should look
+something like this:</li>
+</ul>
+</li>
+</ol>
+<pre><code class="language-java">public static void game(Scanner input) {
+    int[] dice = new int[5];
+
+    rollAllDice(dice);
+
+    rerollPhase(input, dice);
+
+    scorePhase(input, dice);
+}
+</code></pre>
+<ol start="3">
+<li>
+<p>Next, we will use a loop to allow the user to reroll their dice more than
+once. You could also accomplish this by duplicating a lot of code, but the
+loop will be shorter, cleaner, and easier to read.</p>
+<p>We want to repeat the reroll process for as long as the user has rerolls
+left. Make a variable to hold the number of rerolls (it should start at 2),
+then create a while loop that repeats for as long as the user has more than
+zero rerolls. Move the rest of your reroll phase code into this loop.</p>
+<p>If the user answers &quot;yes&quot; when asked if they want to reroll their dice, then
+you should decrease the number of rerolls by one. If the user does not
+answer &quot;yes&quot;, then you can set the number of rerolls to zero so we don't
+keep asking them to reroll their dice.</p>
+<p>Finally, we can move our code that prints the user's rerolled dice out of
+the loop. We're already printing the dice at the beginning of the loop, so
+the user will see what changed between rerolls. We only need to print them
+once after the loop so they can see the final set of dice before scoring.</p>
+<p>Test your code and make sure you can reroll twice (but no more) if you
+always answer &quot;yes&quot; when asked whether to reroll dice. Make sure that
+answering &quot;no&quot; causes the program to print the dice once more before ending.</p>
+</li>
+<li>
+<p>We're going to make one other change to the reroll phase so that our program
+is easier to use. Currently, we have to enter two separate messages: one to
+say that we want to reroll and another to say which dice we want to reroll.
+As the user, it would be nice to include the dice labels when we tell the
+program to reroll our dice.</p>
+<p>Modify your loop so that it asks the user for a command instead of asking
+whether they want to reroll. You should accept two different commands: &quot;roll
+&quot; followed by some dice labels, and &quot;skip&quot;. The roll command should reroll
+the dice and decrease the reroll count by one, the skip command should set
+the reroll count to zero, and any other command should result in an error
+message (see the <a href="#io-format">I/O Format section</a>).</p>
+<p>The roll command might be a little tricky to handle. However, it's much
+easier once you know the right string methods (check the notes and/or Java
+API for more information about these methods):</p>
+<ul>
+<li>You can use <code>startsWith</code> instead of <code>equals</code> to check whether the command
+begins with the word &quot;roll&quot;.</li>
+<li>You can get a string containing only the labels (without the word &quot;roll&quot;)
+by taking a <code>substring</code> of the command. You'll need to provide the
+starting index for the substring.</li>
+<li>You can get the first index where a character appears in a string with the
+<code>indexOf</code> method.</li>
+</ul>
+</li>
+<li>
+<p>We need to add a few other methods for use in the score phase:
+<code>scoreString</code>, <code>calculateDiceScore</code>, and <code>countDice</code>. For now, we're just
+going to write stubs (placeholders) for these methods. This will let us call
+them in the score phase code before we finish writing them, much like when
+we wrote the <code>game</code> method in part 1.</p>
+<p>To create a stub, we just need the method signature line and, if it returns
+a value, a temporary return statement in the method body. This is enough for
+us to compile code that calls the method, even if the method doesn't yet do
+anything useful. Write a stub for the methods listed above. Check the
+<a href="#functions">Functions section</a> for details like the parameters and return
+type of each method. When you add the temporary return statement to these
+methods, just return <code>&quot;placeholder&quot;</code> or <code>-1</code> (depending on whether the
+return type is <code>String</code> or <code>int</code>). We want something that we'll easily
+recognize in our output so we know that our score phase code called these
+methods and used their return values.</p>
+<p>As usual, compile your code and make sure it still works before you
+continue!</p>
+</li>
+<li>
+<p>With placeholders for our other methods, we can now write the <code>scorePhase</code>
+method. We'll start with a simplified version that assumes valid input:</p>
+<ul>
+<li>Call <code>scoreString</code> and print the string it returns</li>
+<li>Prompt the user to choose which die value they want to score</li>
+<li>Subtract one from the user's input</li>
+<li>Call <code>calculateDiceScore</code> with the user's chosen die value and print the
+result</li>
+</ul>
+<p>Test your code and make sure everything still works. You should now see the
+output from <code>scorePhase</code>, including the placeholder values returned by some
+of the method stubs you wrote earlier.</p>
+</li>
+<li>
+<p>Add a loop to the prompt in <code>scorePhase</code>. If the user enters an invalid
+number (valid numbers are integers from 1 to 6), then you should print an
+error message and continue reading input until the user enters a valid
+number.</p>
+<p>Test your code and make sure it handles invalid numbers correctly.</p>
+</li>
+<li>
+<p>Write the <code>calculateDiceScore</code> method. You can use the <code>countDice</code> method to
+count how many times the die value occurs in the dice array, then return
+that number multiplied by the die value.</p>
+<p>Remember that your second parameter is the <strong>category index</strong>, not the <strong>die
+value</strong>. The die value will be one greater than the category index. This may
+seem like an odd choice if you follow the user input from <code>scorePhase</code>
+(where we subtracted one) to this method (where we added one). It will make
+more sense in project 2.3 when we add the other score categories.</p>
+<p>As always, test your code! We know that our <code>countDice</code> stub currently
+returns -1, so we should now expect the return value to be whatever die
+value we enter multiplied by -1.</p>
+</li>
+<li>
+<p>Write the <code>countDice</code> method. This method should iterate over the dice array
+and count how many times the given die value appears in the array. When you
+test your code, you should now see the correct score for the chosen upper
+category. For example, if the user chose to score 3 with the dice 1, 6, 3,
+4, and 3, then they should receive 6 points.</p>
+</li>
+<li>
+<p>The final method we need to write is <code>scoreString</code>. To start, I recommend
+creating the following array at the beginning of <code>scoreString</code>:
+<code>String[] categoryNames = new String[] {&quot;Aces&quot;, &quot;Twos&quot;, &quot;Threes&quot;, &quot;Fours&quot;, &quot;Fives&quot;, &quot;Sixes&quot;};</code>.
+This will give you an array with all of the category names and make it much
+easier to use a loop in this method.</p>
+<pre><code>Now we need to build a string. Remember, we're **not** supposed to print
+anything! We need to create and return a string, then let the code that
+called this method decide what to do with it. Start with the header shown
+in the [I/O Format section](#io-format): `&quot;Score Options:\n&quot;`.
+
+Finally, we can create a loop that iterates over each category index. This
+loop should add a line for that category that looks like this: `    1.
+</code></pre>
+<p>Aces:
+3<code>. We start with four spaces of indentation, then the number the     user would enter to choose this category, then the category name (from the     array we created earlier), and finally the score we would receive for that     category (use the </code>calculateDiceScore`
+method).</p>
+<pre><code>With this method complete, your program should be finished! Test it to make
+sure everything works. The tests won't give useful feedback if you code
+can't compile.
+</code></pre>
+</li>
+</ol>
+<h3 id="task-2-run-tests"><a class="header" href="#task-2-run-tests">Task 2: Run Tests</a></h3>
+<p>Run the tests for your project and look at the feedback. If your code passed
+every test, then this Guided Project is finished. The test program can also pack
+all of your projects for upload to Blackboard.</p>
+<h2 id="deliverables"><a class="header" href="#deliverables">Deliverables</a></h2>
+<ul>
+<li>Your <code>DiceGame.java</code> file</li>
+</ul>
+<p>In order for a guided project to count as complete, it must:</p>
+<ul>
+<li>be submitted on Blackboard before the deadline</li>
+<li>packaged and named correctly (use the test script's pack command)</li>
+<li>pass all of the tests I gave you</li>
+</ul>
+<p>It should be easy to tell whether your project is complete as long as you run
+the tests. If it's not passing and you can't figure out why, then ask for help
+rather than submitting an incomplete assignment.</p>
+<h2 id="additional-details"><a class="header" href="#additional-details">Additional Details</a></h2>
+<h3 id="io-format"><a class="header" href="#io-format">I/O Format</a></h3>
+<p>A Guided Project program must meet the following I/O requirements:</p>
+<ul>
+<li>The program accepts the required input in the order shown in the assignment
+and does not expect any additional input.</li>
+<li>The program produces each line of required output in the order specified in
+the assignment.</li>
+</ul>
+<p>The program may include additional output before, between, and after lines of
+required output. This additional output must be on a separate line from any
+required output.</p>
+<p>Your program must accept the following user input:</p>
+<ul>
+<li>During each iteration of the reroll phase:
+<ul>
+<li>The command &quot;roll X&quot;, where &quot;X&quot; is a series of letters (uppercase or
+lowercase) from A to E</li>
+<li>The command &quot;skip&quot;</li>
+<li>(optional) In addition to &quot;roll X&quot; and &quot;skip&quot;, you can accept abbreviations
+such as &quot;r X&quot; and &quot;s&quot;</li>
+</ul>
+</li>
+<li>During the score phase:
+<ul>
+<li>An integer</li>
+<li>If the integer is not a valid choice, then read additional integers until a
+valid choice is entered</li>
+</ul>
+</li>
+</ul>
+<p>Your program must print the following output:</p>
+<ul>
+<li>During each iteration of the reroll phase:
+<ul>
+<li>The user's dice, formatted by the <code>diceString</code> method</li>
+<li>The number of rolls remaining formatted as &quot;X rolls remaining.&quot;</li>
+<li>If the user enters an invalid command, the message &quot;ERROR: INVALID COMMAND&quot;</li>
+</ul>
+</li>
+<li>At the end of the reroll phase:
+<ul>
+<li>The user's dice, formatted by the <code>diceString</code> method</li>
+</ul>
+</li>
+<li>During the score phase:
+<ul>
+<li>A list of options produced by the <code>scoreString</code> method</li>
+<li>The message &quot;ERROR: INVALID NUMBER&quot; for each invalid input the user provides</li>
+<li>The number of points received for the chosen category formatted as &quot;You
+receive X points.&quot;</li>
+</ul>
+</li>
+</ul>
+<p>Additionally, your program should include reasonable prompts for information and
+any additional text that you think would make it easier for the user to interact
+with the program. It's up to you how much of this to include, what exactly to
+say, and how to format it. The tests will not check these prompts.</p>
+<h3 id="functions"><a class="header" href="#functions">Functions</a></h3>
+<p>Your <code>DiceGame</code> class must include all of the methods (functions) described
+below. Each of these methods must have the <code>public</code> and <code>static</code> modifiers.</p>
+<h4 id="game"><a class="header" href="#game"><code>game</code></a></h4>
+<ul>
+<li>Return type: <code>void</code></li>
+<li>Parameters:
+<ul>
+<li>A <code>Scanner</code> for reading user input</li>
+</ul>
+</li>
+</ul>
+<p>Must perform the following process:</p>
+<ul>
+<li>Roll a set of five dice</li>
+<li>Call <code>rerollPhase</code>, passing the scanner and dice as arguments</li>
+<li>Call <code>scorePhase</code>, passing the scanner and dice as arguments</li>
+</ul>
+<h4 id="rollalldice"><a class="header" href="#rollalldice"><code>rollAllDice</code></a></h4>
+<ul>
+<li>Return type: <code>void</code></li>
+<li>Parameters:
+<ul>
+<li>An <code>int</code> array representing a set of five dice</li>
+</ul>
+</li>
+</ul>
+<p>Each element of the array parameter must be set to a random number from 1 to 6.</p>
+<p>To ensure compatibility with my tests, there are a few additional requirements:</p>
+<ul>
+<li>Each random number is generated by either the <code>roll</code> method or the <code>d6</code> method
+of the <code>Dice</code> class.</li>
+<li>Your program &quot;rolls&quot; the dice in the order they appear in the array.</li>
+<li>Your program does not roll extra dice. For example, calling one of the Dice
+class's methods to generate a random number when you don't need to reroll a
+die, or rolling each die twice instead of once.</li>
+</ul>
+<h4 id="rollsomedice"><a class="header" href="#rollsomedice"><code>rollSomeDice</code></a></h4>
+<ul>
+<li>Return type: <code>void</code></li>
+<li>Parameters:
+<ul>
+<li>An <code>int</code> array representing a set of five dice</li>
+<li>A <code>String</code> containing letters from a to e, representing the labels of all
+dice that will be rerolled</li>
+</ul>
+</li>
+</ul>
+<p>Each element of the array parameter whose label appears in the string parameter
+must be set to a random number from 1 to 6. Each element of the array parameter
+whose label does <strong>not</strong> appear in the string parameter must be left as is.</p>
+<p>Labels are not case-sensitive. An element's label is determined by its index:</p>
+<ul>
+<li>index 0 -&gt; a</li>
+<li>index 1 -&gt; b</li>
+<li>index 2 -&gt; c</li>
+<li>index 3 -&gt; d</li>
+<li>index 4 -&gt; e</li>
+</ul>
+<p>To ensure compatibility with my tests, there are a few additional requirements:</p>
+<ul>
+<li>Each random number is generated by either the <code>roll</code> method or the <code>d6</code> method
+of the <code>Dice</code> class.</li>
+<li>Your program &quot;rolls&quot; the dice in the order they appear in the array.</li>
+<li>Your program does not roll extra dice. For example, calling one of the Dice
+class's methods to generate a random number when you don't need to reroll a
+die, or rolling each die twice instead of once.</li>
+</ul>
+<p>You may assume that the letters in the label string are all lowercase, sorted
+alphabetically, and that no letter appears more than once. For example, your
+program will never be given the label string &quot;adc&quot; or &quot;aacd&quot;, but it may be
+given the label string &quot;acd&quot;.</p>
+<h4 id="dicestring"><a class="header" href="#dicestring"><code>diceString</code></a></h4>
+<ul>
+<li>Return type: <code>String</code></li>
+<li>Parameters:
+<ul>
+<li>An <code>int</code> array representing a set of five dice</li>
+</ul>
+</li>
+</ul>
+<p>The returned string must be formatted as shown below. Each <code>X</code> must be replaced
+with an element from the array parameter, and these elements must appear in
+order.</p>
+<pre><code>  A     B     C     D     E
++---+ +---+ +---+ +---+ +---+
+| X | | X | | X | | X | | X |
++---+ +---+ +---+ +---+ +---+
+</code></pre>
+<h4 id="rerollphase"><a class="header" href="#rerollphase"><code>rerollPhase</code></a></h4>
+<ul>
+<li>Return type: <code>void</code></li>
+<li>Parameters:
+<ul>
+<li>A <code>Scanner</code> for reading user input</li>
+<li>An <code>int</code> array representing a set of five dice</li>
+</ul>
+</li>
+</ul>
+<p>The user begins with 2 available rolls. For as long as the user has more than 0
+rolls, this method must repeat the following process:</p>
+<ul>
+<li>Display the user's dice and roll count</li>
+<li>Prompt the user for and read a command</li>
+<li>Execute the user's command:
+<ul>
+<li>roll: the string of letters after &quot;roll &quot; must be passed to the
+<code>rollSomeDice</code> method along with the dice array, and the roll count should
+be decreased by one</li>
+<li>skip: the roll count should be set to zero</li>
+<li>Any other commands must result in an error message</li>
+</ul>
+</li>
+</ul>
+<p>Display the user's dice again after the above loop is finished.</p>
+<h4 id="scorephase"><a class="header" href="#scorephase"><code>scorePhase</code></a></h4>
+<ul>
+<li>Return type: <code>void</code></li>
+<li>Parameters:
+<ul>
+<li>A <code>Scanner</code> for reading user input</li>
+<li>An <code>int</code> array representing a set of five dice</li>
+</ul>
+</li>
+</ul>
+<p>Must perform the following process:</p>
+<ul>
+<li>Display the score options and how many points each option is worth</li>
+<li>Read integers from the user until they enter a number from one to six,
+displaying an error message for each invalid input</li>
+<li>Calculate and print the score for the category chosen by the user</li>
+</ul>
+<h4 id="countdice"><a class="header" href="#countdice"><code>countDice</code></a></h4>
+<ul>
+<li>Return type: <code>int</code></li>
+<li>Parameters:
+<ul>
+<li>An <code>int</code> array representing a set of five dice</li>
+<li>An <code>int</code> representing the die value to count</li>
+</ul>
+</li>
+</ul>
+<p>Returns the number of times the die value appears in the array.</p>
+<h4 id="calculatedicescore"><a class="header" href="#calculatedicescore"><code>calculateDiceScore</code></a></h4>
+<ul>
+<li>Return type: <code>int</code></li>
+<li>Parameters:
+<ul>
+<li>An <code>int</code> array representing a set of five dice</li>
+<li>An <code>int</code> representing the index of a score category (assume a number from 0
+to 5)</li>
+</ul>
+</li>
+</ul>
+<p>Returns the score for the upper section category with the given index:</p>
+<ul>
+<li>0 -&gt; Aces</li>
+<li>1 -&gt; Twos</li>
+<li>2 -&gt; Threes</li>
+<li>3 -&gt; Fours</li>
+<li>4 -&gt; Fives</li>
+<li>5 -&gt; Sixes</li>
+</ul>
+<h4 id="scorestring"><a class="header" href="#scorestring"><code>scoreString</code></a></h4>
+<ul>
+<li>Return type: <code>String</code></li>
+<li>Parameters:
+<ul>
+<li>An <code>int</code> array representing a set of five dice</li>
+</ul>
+</li>
+</ul>
+<p>The returned string must be formatted as shown below. Each <code>X</code> must be replaced
+with the score the user will receive from their dice if they choose that
+category.</p>
+<pre><code>Score Options:
+    1. Aces: X
+    2. Twos: X
+    3. Threes: X
+    4. Fours: X
+    5. Fives: X
+    6. Sixes: X
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../project2/part1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../project2/part3.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../project2/part1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../project2/part3.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
