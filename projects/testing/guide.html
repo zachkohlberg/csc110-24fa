@@ -201,7 +201,7 @@ and using the help command before asking me why something isn't working.</p>
 <p>Before testing a project, you should use the status command to determine which
 projects can be found and whether they were previously recorded passing or
 failing their tests. The status command's output looks like this (as of version
-0.6.0):</p>
+0.7.0):</p>
 <pre><code>Project 1.1
 
 Required project files:
@@ -264,7 +264,7 @@ and where it should be located inside your projects folder. If will also say
 whether the file was found, is missing, or was found but miscapitalized. If
 your file was not found or was miscapitalized, then you may have named a file
 or folder incorrectly.</li>
-<li>Last recorded test: as of version 0.6.0, the test program will save the
+<li>Last recorded test: as of version 0.7.0, the test program will save the
 overall result of each test and a backup copy of your code in the
 <code>tests/student</code> folder. If the status command can find those files, then it
 will show the following information:
@@ -389,6 +389,16 @@ Blackboard. <strong>Warning</strong>: remember to check the contents of the zip 
 uploading it and make sure it contains everything you were expecting. My program
 most likely packed everything correctly, but it's always possible that it made a
 mistake due to a bug.</p>
+<p>As of 0.7.0, the <code>pack</code> command will package projects 1.3 and 2.3 separately
+from the guided projects. These open-ended projects should be submitted
+separately. You should see the following zip folders after running <code>pack</code> if you
+have completed all six projects:</p>
+<ul>
+<li><code>guided_project_submission.zip</code></li>
+<li><code>expanded_project_1_3_submission.zip</code></li>
+<li><code>expanded_project_2_3_submission.zip</code></li>
+</ul>
+<p>Submit each zip file on Blackboard using the appropriate link.</p>
 <h3 id="manually-create-zip"><a class="header" href="#manually-create-zip">Manually Create Zip</a></h3>
 <p>If you want to create the zip folder manually, then you need to check that all
 of your files and folders are named correctly. The <code>status</code> command should take
