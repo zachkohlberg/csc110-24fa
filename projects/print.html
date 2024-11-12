@@ -1619,7 +1619,7 @@ six-sided die. <code>Dice</code> also contains methods for all of the standard p
 dice (d4, d6, d8, d10, d12, and d20). This means you could also use
 <code>Dice.d6()</code> to simulate a six-sided die. It doesn't matter whether you use the
 <code>roll</code> method or one of the polyhedral dice methods.</li>
-<li>This Java programs, like most of the other Java programs you will write, is
+<li>This Java program, like most of the other Java programs you will write, is
 broken up into multiple methods and multiple classes. There are two ways we
 will take advantage of this to make our dice game easier to code:
 <ul>
@@ -1789,7 +1789,7 @@ Array: { 0, 0, 0, 0, 0 }
 Would you like to reroll any dice?
 &gt; yes
 Which dice would you like to reroll?
-01234
+&gt; 01234
 PLACEHOLDER: reroll dice
 Here are your new dice:
 Array: { 0, 0, 0, 0, 0 }
@@ -2204,21 +2204,19 @@ creating the following array at the beginning of <code>scoreString</code>:
 <code>String[] categoryNames = new String[] {&quot;Aces&quot;, &quot;Twos&quot;, &quot;Threes&quot;, &quot;Fours&quot;, &quot;Fives&quot;, &quot;Sixes&quot;};</code>.
 This will give you an array with all of the category names and make it much
 easier to use a loop in this method.</p>
-<pre><code>Now we need to build a string. Remember, we're **not** supposed to print
+<p>Now we need to build a string. Remember, we're <strong>not</strong> supposed to print
 anything! We need to create and return a string, then let the code that
 called this method decide what to do with it. Start with the header shown
-in the [I/O Format section](#io-format): `&quot;Score Options:\n&quot;`.
-
-Finally, we can create a loop that iterates over each category index. This
-loop should add a line for that category that looks like this: `    1.
-</code></pre>
-<p>Aces:
-3<code>. We start with four spaces of indentation, then the number the     user would enter to choose this category, then the category name (from the     array we created earlier), and finally the score we would receive for that     category (use the </code>calculateDiceScore`
-method).</p>
-<pre><code>With this method complete, your program should be finished! Test it to make
+in the <a href="project2/part2.html#io-format">I/O Format section</a>: <code>&quot;Score Options:\n&quot;</code>.</p>
+<p>Finally, we can create a loop that iterates over each category index. This
+loop should add a line for that category that looks like this:
+<code>    1. Aces: 3</code>. We start with four spaces of indentation, then the number
+the user would enter to choose this category, then the category name (from
+the array we created earlier), and finally the score we would receive for
+that category (use the <code>calculateDiceScore</code> method). With this method
+complete, your program should be finished! Compile and run it to make
 sure everything works. The tests won't give useful feedback if you code
-can't compile.
-</code></pre>
+can't compile.</p>
 </li>
 </ol>
 <h3 id="task-2-run-tests-3"><a class="header" href="#task-2-run-tests-3">Task 2: Run Tests</a></h3>
@@ -2365,7 +2363,7 @@ class's methods to generate a random number when you don't need to reroll a
 die, or rolling each die twice instead of once.</li>
 </ul>
 <p>You may assume that the letters in the label string are all lowercase, sorted
-alphabetically, and that no letter appears more than once. For example, your
+alphabetically, and nonrepeating. For example, your
 program will never be given the label string &quot;adc&quot; or &quot;aacd&quot;, but it may be
 given the label string &quot;acd&quot;.</p>
 <h4 id="dicestring-1"><a class="header" href="#dicestring-1"><code>diceString</code></a></h4>
@@ -2776,7 +2774,7 @@ class's methods to generate a random number when you don't need to reroll a
 die, or rolling each die twice instead of once.</li>
 </ul>
 <p>You may assume that the letters in the label string are all lowercase, sorted
-alphabetically, and that no letter appears more than once. For example, your
+alphabetically, and nonrepeating. For example, your
 program will never be given the label string &quot;adc&quot; or &quot;aacd&quot;, but it may be
 given the label string &quot;acd&quot;.</p>
 <h4 id="dicestring-2"><a class="header" href="#dicestring-2"><code>diceString</code></a></h4>
@@ -3270,7 +3268,7 @@ back up your work for a few reasons:</p>
 <li>Only the most recently-tested version of your project is saved, and the backup
 file(s) are overwritten every time you run the test command with that project.</li>
 <li>The <code>tests</code> folder is in the same location as your project folders, which
-means a mishap that causes you to lose your projects will probably delete the
+means a mishap that causes you to lose your projects will probably affect the
 tests folder and any backup copies it contains.</li>
 <li>If you start editing this file, then your work will be lost (probably with no
 way to recover it) as soon as you run the test command with that project. This
